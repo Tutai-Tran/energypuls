@@ -66,9 +66,11 @@ function Windows({ a }: { a: Analysis }) {
   );
 }
 
-export default function EnergyDashboard({ points, asOf }: { points: PricePoint[]; asOf: string }) {
+export default function EnergyDashboard() {
   const [nowHour, setNowHour] = useState<number | null>(null);
   const [kwh, setKwh] = useState(10);
+  const [points, setPoints] = useState<PricePoint[] | null>(null);
+  const [err, setErr] = useState(false);
 
   useEffect(() => {
     const tick = () => setNowHour(amsterdamHour(new Date().toISOString()));
@@ -77,13 +79,29 @@ export default function EnergyDashboard({ points, asOf }: { points: PricePoint[]
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    const now = Date.now();
+    const url =
+      `https://api.energyzero.nl/v1/energyprices?fromDate=${new Date(now - 864e5).toISOString()}` +
+      `&tillDate=${new Date(now + 1728e5).toISOString()}&interval=4&usageType=1&inclBtw=true`;
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j: { Prices?: { readingDate: string; price: number }[] }) =>
+        setPoints((j.Prices || []).map((x) => ({ t: x.readingDate, price: x.price }))),
+      )
+      .catch(() => setErr(true));
+  }, []);
+
+  const asOf = new Date().toISOString();
   const { aToday, aTmr } = useMemo(() => {
+    if (!points) return { aToday: null, aTmr: null };
     const todayStr = amsterdamDate(asOf);
-    const tmrStr = amsterdamDate(new Date(new Date(asOf).getTime() + 864e5).toISOString());
+    const tmrStr = amsterdamDate(new Date(Date.now() + 864e5).toISOString());
     const today = points.filter((p) => amsterdamDate(p.t) === todayStr);
     const tomorrow = points.filter((p) => amsterdamDate(p.t) === tmrStr);
     return { aToday: analyze(today), aTmr: analyze(tomorrow) };
-  }, [points, asOf]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [points]);
 
   const cur = currentHour(aToday, nowHour ?? -1);
   const saving = savingsEUR(aToday, kwh);
@@ -115,11 +133,14 @@ export default function EnergyDashboard({ points, asOf }: { points: PricePoint[]
         <p>Dutch day-ahead electricity — when to run, when to wait.</p>
       </div>
 
-      {!aToday ? (
+      {err ? (
         <div className="empty">
-          Couldn&apos;t load day-ahead prices right now. They come from EnergyZero and refresh
-          automatically — try again in a moment.
+          Couldn&apos;t reach EnergyZero for day-ahead prices. Refresh to try again.
         </div>
+      ) : !points ? (
+        <div className="empty">Loading live day-ahead prices…</div>
+      ) : !aToday ? (
+        <div className="empty">No price data available for today yet.</div>
       ) : (
         <>
           <div className="hero" data-cls={heroCls}>
