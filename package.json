@@ -1,0 +1,23 @@
+{
+  "name": "energypuls",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8610",
+    "build": "next build",
+    "start": "next start -p 8610",
+    "lint": "next lint",
+    "test": "node test/analyze.ts"
+  },
+  "dependencies": {
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}
