@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[52383,["/energypuls/_next/static/chunks/158myu8e_yme3.js","/energypuls/_next/static/chunks/0_n7fmubeq_kf.js"],"default"]
+3:I[97367,["/energypuls/_next/static/chunks/158myu8e_yme3.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/energypuls/_next/static/chunks/0_n7fmubeq_kf.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ZOxKSRS8_FynIn8FixOLU"}
+5:null

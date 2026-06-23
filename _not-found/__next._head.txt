@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[97367,["/energypuls/_next/static/chunks/158myu8e_yme3.js"],"ViewportBoundary"]
+3:I[97367,["/energypuls/_next/static/chunks/158myu8e_yme3.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[27201,["/energypuls/_next/static/chunks/158myu8e_yme3.js"],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"EnergyPuls — Dutch day-ahead electricity"}],["$","meta","1",{"name":"description","content":"When tomorrow's Dutch electricity is cheap or expensive. Shift heavy loads, charge batteries, and export solar at the right hour."}],["$","link","2",{"rel":"icon","href":"/energypuls/icon.svg?icon.0i3jrg4gncsid.svg","sizes":"any","type":"image/svg+xml"}],["$","$L5","3",{}]]}]}]}],null]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"ZOxKSRS8_FynIn8FixOLU"}
